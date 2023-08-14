@@ -1,0 +1,30 @@
+{
+	"info": {
+		"video_id": "S001352",
+		"clip_id": "009",
+		"device": "C",
+		"time": "N",
+		"weather": "F",
+		"is_scripted": "0"
+	},
+	"description": {
+		"frame_id": "0120",
+		"imageWidth": 1920,
+		"imageHeight": 1080
+	},
+	"annotations": {
+		"environment": [],
+		"PM": [
+			{
+				"PM_code": "17",
+				"shape_type": "bbox",
+				"points": [
+					1294.2559641374078,
+					374.00404692579497,
+					114.07265403077679,
+					84.72967343589795
+				]
+			}
+		]
+	}
+}
