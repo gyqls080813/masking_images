@@ -1,10 +1,8 @@
-# 해당 파일은 polygon 데이터 중 라벨의 갯수를 측정하는 과정입니다.
-
 import os
 import json
 
 # JSON 파일 디렉토리 경로 설정
-json_dir = "C:\\Users\\gyqls\\Teamproject2\\masking_images\\labeling"
+json_dir = "D:\\tp2\\Teamproject2\\image-segmentation-yolov8\\data\\old_labels\\all"
 
 # "PM_code" 라벨 종류를 저장할 집합
 pm_label_set = set()
@@ -25,4 +23,4 @@ for json_file in os.listdir(json_dir):
 sorted_pm_labels = sorted(list(pm_label_set))
 print("Polygon 라벨 종류 (정렬된 순서):", sorted_pm_labels)
 
-# Polygon 라벨 종류 (정렬된 순서): ['1', '10', '11', '12', '13', '2', '3', '4', '5', '6', '7', '8', '9']
+# Polygon 라벨 종류 (정렬된 순서): ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']

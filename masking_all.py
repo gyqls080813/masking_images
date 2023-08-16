@@ -1,5 +1,3 @@
-# 해당 폴더는 data 중 train을 masking 하는 과정입니다
-
 import cv2
 import json
 import numpy as np
@@ -10,13 +8,16 @@ image_width = 1920
 image_height = 1080
 
 # 디렉토리 경로
-json_dir = "C:\\Users\\gyqls\\Teamproject2\\masking_images\\data\\labels\\train"
-image_dir = "C:\\Users\\gyqls\\Teamproject2\\masking_images\\data\\images\\train"
-masked_image_dir = "C:\\Users\\gyqls\\Teamproject2\\masking_images\\data\\mask\\train"
+json_dir = "D:\\tp2\\Teamproject2\\image-segmentation-yolov8\\data\\old_labels\\all"
+image_dir = "D:\\tp2\\Teamproject2\\image-segmentation-yolov8\\data\\images\\all"
+masked_image_dir = "D:\\tp2\\Teamproject2\\image-segmentation-yolov8\\data\\mask_all\\train"
 
 # JSON 파일과 이미지 파일 목록 가져오기
 json_files = [f for f in os.listdir(json_dir) if f.endswith(".json")]
 image_files = [f for f in os.listdir(image_dir) if f.endswith(".jpg")]
+
+json_files.sort()
+image_files.sort()
 
 # color_map에 따른 색상 매핑
 color_map = {
@@ -30,6 +31,7 @@ color_map = {
     "8": (255, 255, 0),  # Yellow
     "9": (128, 0, 0),    # Maroon
     "10": (0, 128, 0),   # Lime
+    "11": (75, 0, 130),    # Indigo
     "12": (128, 128, 128), # Gray
     "13": (0, 0, 128),   # Navy
 }
@@ -56,6 +58,7 @@ bbox_label_color_map = {
     "31": (192, 192, 192),  # Silver
     "32": (255, 165, 0),  # Orange (Reddish)
     "33": (255, 192, 203),  # Pink (Light)
+    "34": (255, 255, 127),  
     "35": (0, 255, 127),  # Spring Green
     "36": (218, 165, 32),  # Goldenrod
 }

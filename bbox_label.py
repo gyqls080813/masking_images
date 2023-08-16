@@ -1,10 +1,8 @@
-# 해당 파일은 bbox 데이터 중 라벨의 갯수를 측정하는 과정입니다.
-
 import os
 import json
 
 # JSON 파일 디렉토리 경로 설정
-json_dir = "C:\\Users\\gyqls\\Teamproject2\\masking_images\\labeling"
+json_dir = "D:\\tp2\\Teamproject2\\image-segmentation-yolov8\\data\\old_labels\\all"
 
 # "PM_code" 라벨 종류를 저장할 집합
 pm_label_set = set()

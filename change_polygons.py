@@ -1,15 +1,13 @@
-# 해당 폴더는 json 데이터 중 polygon만 추출하는 과정입니다.
-
 import os
 import json
 import shutil
 
 # 입력과 출력 디렉토리 경로 설정
-input_directory = "C:\\Users\\gyqls\\Teamproject2\\masking_images\\data\\labels"
-output_directory = "C:\\Users\\gyqls\\Teamproject2\\masking_images\\data\\polygon_labels"
+input_directory = "D:\\tp2\\Teamproject2\\image-segmentation-yolov8\\data\\old_labels"
+output_directory = "D:\\tp2\\Teamproject2\\image-segmentation-yolov8\\data\\polygon_labels"
 
 # 입력 디렉토리의 "val"과 "train" 디렉토리에 대해 처리
-for subset in ["val", "train"]:
+for subset in ["all"]:
     input_subset_dir = os.path.join(input_directory, subset)
     output_subset_dir = os.path.join(output_directory, subset)
     

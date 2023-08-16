@@ -1,5 +1,3 @@
-# 해당 폴더는 data 중 val을 masking 하는 과정입니다
-
 import cv2
 import json
 import numpy as np
@@ -10,13 +8,14 @@ image_width = 1920
 image_height = 1080
 
 # 디렉토리 경로
-json_dir = "C:\\Users\\gyqls\\Teamproject2\\masking_images\\data\\labels\\val"
-image_dir = "C:\\Users\\gyqls\\Teamproject2\\masking_images\\data\\images\\val"
-masked_image_dir = "C:\\Users\\gyqls\\Teamproject2\\masking_images\\data\\mask\\val"
+json_dir = "D:\\tp2\\Teamproject2\\image-segmentation-yolov8\\data\\polygon_labels\\all"
+image_dir = "D:\\tp2\\Teamproject2\\image-segmentation-yolov8\\data\\images\\all"
+masked_image_dir = "D:\\tp2\\Teamproject2\\image-segmentation-yolov8\\data\\mask_polygon\\train"
 
 # JSON 파일과 이미지 파일 목록 가져오기
 json_files = [f for f in os.listdir(json_dir) if f.endswith(".json")]
 image_files = [f for f in os.listdir(image_dir) if f.endswith(".jpg")]
+
 
 # color_map에 따른 색상 매핑
 color_map = {
@@ -30,35 +29,11 @@ color_map = {
     "8": (255, 255, 0),  # Yellow
     "9": (128, 0, 0),    # Maroon
     "10": (0, 128, 0),   # Lime
+    "11": (75, 0, 130),    # Indigo
     "12": (128, 128, 128), # Gray
     "13": (0, 0, 128),   # Navy
 }
 
-bbox_label_color_map = {
-    "13": (255, 0, 0),  # Red
-    "14": (0, 255, 0),  # Green
-    "15": (0, 0, 255),  # Blue
-    "16": (255, 255, 0),  # Yellow
-    "17": (255, 0, 255),  # Magenta
-    "18": (0, 255, 255),  # Cyan
-    "19": (128, 0, 0),  # Maroon
-    "20": (0, 128, 0),  # Green (Dark)
-    "21": (0, 0, 128),  # Navy
-    "22": (128, 128, 0),  # Olive
-    "23": (128, 0, 128),  # Purple
-    "24": (0, 128, 128),  # Teal
-    "25": (255, 128, 0),  # Orange
-    "26": (255, 0, 128),  # Pink
-    "27": (128, 255, 0),  # Lime
-    "28": (128, 0, 255),  # Purple (Light)
-    "29": (0, 128, 255),  # Blue (Light)
-    "30": (128, 128, 128),  # Gray
-    "31": (192, 192, 192),  # Silver
-    "32": (255, 165, 0),  # Orange (Reddish)
-    "33": (255, 192, 203),  # Pink (Light)
-    "35": (0, 255, 127),  # Spring Green
-    "36": (218, 165, 32),  # Goldenrod
-}
 
 def find_average_coordinate(polygon_points):
     # 다각형의 x, y 좌표 추출
@@ -71,7 +46,7 @@ def find_average_coordinate(polygon_points):
 
 # 이미지를 그려주는 함수 작성
 def print_image(load_image, data):
-    for polygon_data in data["annotations"]["environment"]:
+    for polygon_data in data["environment"]:
         # polygon 데이터 좌표 추출 및 절대 좌표로 변환
         polygon_points_relative = polygon_data["points"]
         polygon_points_absolute = [(float(y), float(x)) for x, y in polygon_points_relative]
@@ -93,31 +68,7 @@ def print_image(load_image, data):
         label = f"Area {area_code}"  # 라벨 텍스트
         org = (int(avg_x), int(avg_y))
         cv2.putText(load_image, label, org, font, 0.5, (0, 255, 255), 2)  # 흰색으로 표시
-        
-            # "PM" (바운딩 박스)에 대한 정보 처리
-    for bbox_data in data["annotations"]["PM"]:
-        # bbox 데이터 추출 및 절대 좌표로 변환
-        bbox_info = bbox_data["points"]
-        x, y, w, h = bbox_info
-        top_left = (int(x), int(y))
-        bottom_right = (int(x + w), int(y + h))
-
-        # 바운딩 박스 라벨 가져오기
-        bbox_label = bbox_data["PM_code"]
-        bbox_color = bbox_label_color_map.get(bbox_label, (0, 0, 0))  # Default to black if label not found
-
-        # 사각형 그리기
-        load_image = cv2.rectangle(load_image, top_left, bottom_right, bbox_color, thickness=2)
-
-        # 바운딩 박스 라벨 추가
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        label = f"Label {bbox_label}"  # 라벨 텍스트
-        org = (int(x), int(y))
-        cv2.putText(load_image, label, org, font, 0.5, (255, 255, 255), 2)  # 흰색으로 표시
-
     return load_image
-
-
 
 # 각 JSON 파일에 대해 작업 수행
 for json_filename in json_files:
