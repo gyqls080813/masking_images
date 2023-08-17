@@ -11,3 +11,7 @@ if image is not None:
     print("Image height:", height)
 else:
     print("Failed to load the image.")
+
+# 이미지 크기
+# image_width = 1920
+# image_height = 1080

@@ -33,7 +33,6 @@ color_map = {
     "10": (0, 128, 0),   # Lime
     "11": (75, 0, 130),    # Indigo
     "12": (128, 128, 128), # Gray
-    "13": (0, 0, 128),   # Navy
 }
 
 bbox_label_color_map = {
@@ -58,7 +57,6 @@ bbox_label_color_map = {
     "31": (192, 192, 192),  # Silver
     "32": (255, 165, 0),  # Orange (Reddish)
     "33": (255, 192, 203),  # Pink (Light)
-    "34": (255, 255, 127),  
     "35": (0, 255, 127),  # Spring Green
     "36": (218, 165, 32),  # Goldenrod
 }
